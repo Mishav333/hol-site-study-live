@@ -230,32 +230,6 @@ outline:none;
 border-color:var(--charcoal);
 }
 .field textarea{resize:vertical;min-height:80px}
-/* Optional section */
-.optional-section{margin-bottom:2rem}
-.optional-title{
-font-size:1.05rem;
-font-family:var(--serif);
-margin-bottom:1rem;
-}
-.optional-skip{
-display:inline-block;
-font-size:.85rem;
-opacity:.5;
-cursor:pointer;
-margin-top:.75rem;
-padding:.25rem 0;
-border:none;background:none;
-font-family:var(--sans);
-color:var(--charcoal);
--webkit-tap-highlight-color:transparent;
-}
-.optional-skip:hover{opacity:.8}
-.continue-row{
-margin-top:2rem;
-display:flex;
-gap:.75rem;
-flex-wrap:wrap;
-}
 /* Footer */
 .site-footer{
 position:fixed;bottom:0;left:0;right:0;
@@ -266,11 +240,6 @@ opacity:.4;
 background:var(--bone);
 z-index:50;
 letter-spacing:.02em;
-}
-/* Concept headline options */
-.concept-option{
-font-style:italic;
-font-size:.875rem;
 }
 /* Fade transition helper */
 @media(prefers-reduced-motion:reduce){
@@ -531,96 +500,21 @@ font-size:.875rem;
 <div class="frame" id="frame-thanks">
 <h1 style="margin-bottom:1.5rem;margin-top:2rem">Thanks. Your answers are in.</h1>
 <p>Nothing you answered is attached to your name. The study helps us build something that actually fits the people on these sites.</p>
-<button class="btn btn-block" style="margin-top:2rem" onclick="showOptional()">Continue</button>
-</div>
-
-<!-- FRAME 14: Optional questions -->
-<div class="frame" id="frame-optional">
-<!-- Optional 1: Source -->
-<div class="optional-section" id="optSection1">
-<p class="optional-title">Where did you see this.</p>
-<div class="option-group" data-q="source" data-type="single">
-<label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" disabled name="source" value="A screen at my camp">
-<span class="radio-mark"></span>
-<span class="option-text">A screen at my camp</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" disabled name="source" value="A mate told me">
-<span class="radio-mark"></span>
-<span class="option-text">A mate told me</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" disabled name="source" value="I searched for it">
-<span class="radio-mark"></span>
-<span class="option-text">I searched for it</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" disabled name="source" value="Somewhere else">
-<span class="radio-mark"></span>
-<span class="option-text">Somewhere else</span>
-</label>
-</div>
-</div>
-
-<!-- Optional 2: Seen screens -->
-<div class="optional-section" id="optSection2" style="margin-top:2.5rem">
-<p class="optional-title">Seen any of these on the screens?</p>
-<div class="option-group" data-q="seen_screens" data-type="single">
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Have you heard of peptides?">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Have you heard of peptides?"</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Everyone has an opinion on peptides. Not many could explain one.">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Everyone has an opinion on peptides. Not many could explain one."</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Everything you know about this, you got from a bloke at the gym.">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Everything you know about this, you got from a bloke at the gym."</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Peptides. The thing nobody discusses at work.">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Peptides. The thing nobody discusses at work."</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Nobody has ever asked you. We are.">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Nobody has ever asked you. We are."</span>
-</label>
-<label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" disabled name="seen_screens" value="Peptides. Seven questions. Anonymous.">
-<span class="radio-mark"></span>
-<span class="option-text concept-option">"Peptides. Seven questions. Anonymous."</span>
-</label>
-</div>
-</div>
-
-<!-- Optional 3: Free text -->
-<div class="optional-section" id="optSection3" style="margin-top:2.5rem">
-<p class="optional-title">Anything you reckon we should know?</p>
-<div class="field">
-<textarea id="feedbackText" placeholder="Optional" rows="3"></textarea>
-</div>
-</div>
-
-<button class="btn btn-block" style="margin-top:1rem" onclick="submitOptionalAndContinue()">Continue</button>
-<button class="optional-skip" onclick="submitOptionalAndContinue()" style="display:block;margin-top:.5rem;text-align:center;width:100%">Skip these</button>
+<button class="btn btn-block" style="margin-top:2rem" onclick="showFrame('invite')">Continue</button>
 </div>
 
 <!-- FRAME 10: Invitation -->
 <div class="frame" id="frame-invite">
-<p style="margin-top:2rem;margin-bottom:1.5rem">Fair enough to tell you what this is for.</p>
-<p>House of Longevity opens this year. Australian doctors, an Australian compounding pharmacy, and a blood test before anything is prescribed.</p>
-<p>The first 1,000 places are going to people who work on these sites, before anyone else is offered one. A founding rate held for your first 12 months. A conversation with an Australian doctor rather than a salesperson.</p>
-<p>First in, first served. No application, no assessment.</p>
-<div style="margin-top:2rem">
+<div class="lockup" style="margin-top:2.5rem">THE SITE STUDY &middot; WHAT THIS IS FOR</div>
+<div class="gold-thread"></div>
+<h2 class="headline" style="margin-bottom:1.75rem">House of Longevity opens this year.</h2>
+<p>Australian doctors. An Australian compounding pharmacy. And a blood test before anything is prescribed.</p>
+<p>The first 1,000 places go to people who work on these sites. Before anyone else is offered one. A founding rate, held for your first 12 months.</p>
+<p>A conversation with an Australian doctor. Not a salesperson.</p>
+<p class="framing">First in, first served. No application. No assessment.</p>
+<div style="margin-top:2.5rem">
 <button class="btn btn-block" onclick="goToSignup()">Put my name down</button>
-<button class="btn btn-block btn-ghost" onclick="goToExit()">Not right now</button>
+<button class="btn btn-block btn-ghost" style="margin-top:.9rem" onclick="goToExit()">Not right now</button>
 </div>
 </div>
 
@@ -703,7 +597,6 @@ try {
 const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwLNYVUz_EVg2t_fqwpkYEo7qvhEY85umPmKBlSem7GuEhKzLDNBH5WLY9CnPb8LKJL/exec';
 
 var answers = {};
-var optionalData = {};
 var currentFrame = 'entry';
 var q7ageVal = null;
 var q7offVal = null;
@@ -834,38 +727,6 @@ function advanceQ7() {
   });
 
   showFrame('thanks');
-}
-
-function showOptional() {
-  showFrame('optional');
-}
-
-function selectOptional(label, qKey) {
-  var group = label.parentElement;
-  var labels = group.querySelectorAll('.option-label');
-  for (var i = 0; i < labels.length; i++) {
-    labels[i].classList.remove('selected');
-  }
-  label.classList.add('selected');
-  label.querySelector('input').checked = true;
-  optionalData[qKey] = label.querySelector('input').value;
-}
-
-function submitOptionalAndContinue() {
-  var fb = document.getElementById('feedbackText').value.trim();
-  if (fb) optionalData.feedback = fb;
-
-  // Submit optional data if anything was answered
-  if (Object.keys(optionalData).length > 0) {
-    submitData({
-      source: optionalData.source || null,
-      seen_screens: optionalData.seen_screens || null,
-      feedback: optionalData.feedback || null,
-      type: 'optional'
-    });
-  }
-
-  showFrame('invite');
 }
 
 function goToSignup() {
