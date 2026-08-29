@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Site Study | House of Longevity</title>
+<meta name="description" content="Seven questions. Anonymous. About a minute. A study for people who work on mine sites.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bone:#FCF8F5;--charcoal:#221E19;--gold:#8A6A33;
+--sand:#F1EADD;--limestone:#D9C9AE;
+--serif:"Cormorant Garamond",Georgia,serif;
+--sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+--ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+background:var(--bone);color:var(--charcoal);
+font-family:var(--sans);line-height:1.6;
+min-height:100vh;min-height:100dvh;
+display:flex;flex-direction:column;
+-webkit-font-smoothing:antialiased;
+}
+.frame{
+display:none;opacity:0;
+width:100%;max-width:520px;
+margin:0 auto;
+padding:2rem 1.25rem 6rem;
+flex:1;
+transition:opacity .25s var(--ease);
+}
+.frame.active{display:block}
+.frame.visible{opacity:1}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.25}
+h1{font-size:clamp(1.75rem,5vw,2.5rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,4vw,2rem);letter-spacing:-.01em}
+h3{font-size:1.25rem}
+p{margin-bottom:1rem}
+.lockup{
+font-family:var(--sans);
+font-size:.75rem;
+letter-spacing:.15em;
+text-transform:uppercase;
+color:var(--charcoal);
+opacity:.7;
+margin-bottom:1.5rem;
+}
+.gold-thread{
+width:3rem;height:1px;
+background:var(--gold);
+margin:1.5rem 0;
+}
+.headline{margin-bottom:.75rem}
+.subline{
+font-size:1.05rem;
+opacity:.7;
+margin-bottom:2rem;
+}
+.framing{
+font-size:.925rem;
+opacity:.65;
+line-height:1.7;
+margin-top:2rem;
+}
+/* Buttons */
+.btn{
+display:inline-block;
+font-family:var(--sans);
+font-size:1rem;
+font-weight:500;
+padding:.875rem 2rem;
+border-radius:2px;
+border:1.5px solid var(--charcoal);
+background:var(--charcoal);
+color:var(--bone);
+cursor:pointer;
+transition:background .15s,color .15s,border-color .15s;
+text-align:center;
+min-height:48px;
+line-height:1.3;
+-webkit-tap-highlight-color:transparent;
+text-decoration:none;
+}
+.btn:hover{background:#3a352e;border-color:#3a352e}
+.btn:active{background:#000;border-color:#000}
+.btn-ghost{
+background:transparent;
+color:var(--charcoal);
+}
+.btn-ghost:hover{background:var(--sand);border-color:var(--charcoal)}
+.btn-ghost:active{background:var(--limestone)}
+.btn-block{display:block;width:100%}
+.btn+.btn{margin-top:.75rem}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+/* Progress bar */
+.progress-wrap{
+position:fixed;top:0;left:0;right:0;
+z-index:100;
+padding:.75rem 1.25rem .5rem;
+background:var(--bone);
+}
+.progress-track{
+width:100%;max-width:520px;margin:0 auto;
+height:2px;background:var(--limestone);
+border-radius:1px;
+position:relative;
+}
+.progress-bar{
+height:100%;background:var(--charcoal);
+border-radius:1px;
+transition:width .3s var(--ease);
+}
+.progress-label{
+font-size:.7rem;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--gold);
+text-align:right;
+max-width:520px;
+margin:.35rem auto 0;
+font-variant:small-caps;
+font-family:var(--sans);
+}
+/* Question styles */
+.q-title{margin-bottom:1.75rem;margin-top:3.5rem}
+.option-group{display:flex;flex-direction:column;gap:.625rem}
+.option-label{
+display:flex;align-items:flex-start;gap:.75rem;
+padding:.875rem 1rem;
+border:1.5px solid var(--limestone);
+border-radius:3px;
+cursor:pointer;
+transition:border-color .15s,background .15s;
+min-height:48px;
+-webkit-tap-highlight-color:transparent;
+font-size:.95rem;
+line-height:1.45;
+}
+.option-label:hover{border-color:var(--charcoal);background:rgba(241,234,221,.3)}
+.option-label.selected{
+border-color:var(--charcoal);
+background:var(--sand);
+}
+.option-label input{
+position:absolute;opacity:0;pointer-events:none;
+}
+.radio-mark,.check-mark{
+flex-shrink:0;
+width:20px;height:20px;
+border:1.5px solid var(--charcoal);
+margin-top:1px;
+position:relative;
+transition:background .15s,border-color .15s;
+}
+.radio-mark{border-radius:50%}
+.check-mark{border-radius:2px}
+.option-label.selected .radio-mark{
+background:var(--charcoal);
+box-shadow:inset 0 0 0 3px var(--bone);
+}
+.option-label.selected .check-mark{
+background:var(--charcoal);
+}
+.option-label.selected .check-mark::after{
+content:'';position:absolute;
+left:5.5px;top:2px;
+width:5px;height:10px;
+border:solid var(--bone);
+border-width:0 2px 2px 0;
+transform:rotate(45deg);
+}
+.option-text{flex:1;padding-top:1px}
+/* Chip groups (Q7) */
+.chip-group-label{
+font-size:.8rem;
+letter-spacing:.1em;
+text-transform:uppercase;
+color:var(--gold);
+margin-bottom:.625rem;
+margin-top:1.5rem;
+font-family:var(--sans);
+}
+.chip-group-label:first-of-type{margin-top:0}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{
+display:inline-flex;align-items:center;justify-content:center;
+padding:.625rem 1.125rem;
+border:1.5px solid var(--limestone);
+border-radius:2px;
+cursor:pointer;
+font-size:.9rem;
+transition:border-color .15s,background .15s;
+min-height:44px;
+-webkit-tap-highlight-color:transparent;
+text-align:center;
+line-height:1.3;
+}
+.chip:hover{border-color:var(--charcoal);background:rgba(241,234,221,.3)}
+.chip.selected{
+border-color:var(--charcoal);
+background:var(--sand);
+}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+/* Q4 Next button */
+.q4-next{margin-top:1.5rem}
+/* Form fields */
+.field{margin-bottom:1.25rem}
+.field label{
+display:block;
+font-size:.85rem;
+margin-bottom:.375rem;
+opacity:.7;
+}
+.field input,.field textarea{
+width:100%;
+font-family:var(--sans);
+font-size:1rem;
+padding:.75rem .875rem;
+border:1.5px solid var(--limestone);
+border-radius:2px;
+background:transparent;
+color:var(--charcoal);
+transition:border-color .15s;
+-webkit-appearance:none;
+}
+.field input:focus,.field textarea:focus{
+outline:none;
+border-color:var(--charcoal);
+}
+.field textarea{resize:vertical;min-height:80px}
+/* Optional section */
+.optional-section{margin-bottom:2rem}
+.optional-title{
+font-size:1.05rem;
+font-family:var(--serif);
+margin-bottom:1rem;
+}
+.optional-skip{
+display:inline-block;
+font-size:.85rem;
+opacity:.5;
+cursor:pointer;
+margin-top:.75rem;
+padding:.25rem 0;
+border:none;background:none;
+font-family:var(--sans);
+color:var(--charcoal);
+-webkit-tap-highlight-color:transparent;
+}
+.optional-skip:hover{opacity:.8}
+.continue-row{
+margin-top:2rem;
+display:flex;
+gap:.75rem;
+flex-wrap:wrap;
+}
+/* Footer */
+.site-footer{
+position:fixed;bottom:0;left:0;right:0;
+padding:.75rem 1.25rem;
+text-align:center;
+font-size:.7rem;
+opacity:.4;
+background:var(--bone);
+z-index:50;
+letter-spacing:.02em;
+}
+/* Concept headline options */
+.concept-option{
+font-style:italic;
+font-size:.875rem;
+}
+/* Fade transition helper */
+@media(prefers-reduced-motion:reduce){
+.frame{transition:none}
+.progress-bar{transition:none}
+}
+/* Larger screens */
+@media(min-width:640px){
+.frame{padding:3rem 2rem 6rem}
+.btn+.btn-ghost{margin-top:0;margin-left:.75rem}
+.btn-row-desktop{display:flex;gap:.75rem}
+.btn-row-desktop .btn{flex:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar (hidden on non-question frames) -->
+<div class="progress-wrap" id="progressWrap" style="display:none" aria-hidden="true">
+<div class="progress-track"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+<div class="progress-label" id="progressLabel"></div>
+</div>
+
+<!-- FRAME 1: Entry -->
+<div class="frame active" id="frame-entry">
+<div class="lockup">THE SITE STUDY &middot; Mining and peptides</div>
+<div class="gold-thread"></div>
+<h1 class="headline">Nobody has ever asked you. We are.</h1>
+<p class="subline">Seven questions. Anonymous. About a minute.</p>
+<button class="btn btn-block" onclick="startQuiz()">Start the study</button>
+<p class="framing">We are building something for people on these sites and we would rather ask than guess. House of Longevity is an Australian clinic. Nothing you answer is attached to your name.</p>
+</div>
+
+<!-- FRAME 2: Q1 -->
+<div class="frame" id="frame-q1">
+<h2 class="q-title">Have you heard of peptides?</h2>
+<div class="option-group" data-q="q1" data-type="single">
+<label class="option-label" onclick="selectSingle(this,'q1')">
+<input type="radio" name="q1" value="Yes, I know them well">
+<span class="radio-mark"></span>
+<span class="option-text">Yes, I know them well</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q1')">
+<input type="radio" name="q1" value="I've heard of them but don't know much">
+<span class="radio-mark"></span>
+<span class="option-text">I've heard of them but don't know much</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q1')">
+<input type="radio" name="q1" value="No, never heard of them">
+<span class="radio-mark"></span>
+<span class="option-text">No, never heard of them</span>
+</label>
+</div>
+</div>
+
+<!-- FRAME 3: Q2 -->
+<div class="frame" id="frame-q2">
+<h2 class="q-title">Do you know what peptides actually do?</h2>
+<div class="option-group" data-q="q2" data-type="single">
+<label class="option-label" onclick="selectSingle(this,'q2')">
+<input type="radio" name="q2" value="Yes, I could explain how they work">
+<span class="radio-mark"></span>
+<span class="option-text">Yes, I could explain how they work</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q2')">
+<input type="radio" name="q2" value="I have a rough idea">
+<span class="radio-mark"></span>
+<span class="option-text">I have a rough idea</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q2')">
+<input type="radio" name="q2" value="I've heard of them but couldn't tell you what they do">
+<span class="radio-mark"></span>
+<span class="option-text">I've heard of them but couldn't tell you what they do</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q2')">
+<input type="radio" name="q2" value="No, no idea">
+<span class="radio-mark"></span>
+<span class="option-text">No, no idea</span>
+</label>
+</div>
+</div>
+
+<!-- FRAME 4: Q3 -->
+<div class="frame" id="frame-q3">
+<h2 class="q-title">Do you know someone who has taken peptides?</h2>
+<div class="option-group" data-q="q3" data-type="single">
+<label class="option-label" onclick="selectSingle(this,'q3')">
+<input type="radio" name="q3" value="Yes">
+<span class="radio-mark"></span>
+<span class="option-text">Yes</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q3')">
+<input type="radio" name="q3" value="No">
+<span class="radio-mark"></span>
+<span class="option-text">No</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q3')">
+<input type="radio" name="q3" value="Not sure">
+<span class="radio-mark"></span>
+<span class="option-text">Not sure</span>
+</label>
+</div>
+</div>
+
+<!-- FRAME 5: Q4 (multi-select) -->
+<div class="frame" id="frame-q4">
+<h2 class="q-title">If you haven't taken them, what has stopped you?</h2>
+<div class="option-group" data-q="q4" data-type="multi">
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="I don't know who to get them from">
+<span class="check-mark"></span>
+<span class="option-text">I don't know who to get them from</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="I don't trust the sources I've seen">
+<span class="check-mark"></span>
+<span class="option-text">I don't trust the sources I've seen</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="I wasn't sure they were legal">
+<span class="check-mark"></span>
+<span class="option-text">I wasn't sure they were legal</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="Safety concerns">
+<span class="check-mark"></span>
+<span class="option-text">Safety concerns</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="Injecting and mixing it myself seems like a hassle">
+<span class="check-mark"></span>
+<span class="option-text">Injecting and mixing it myself seems like a hassle</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="Cost">
+<span class="check-mark"></span>
+<span class="option-text">Cost</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="I don't know enough about them">
+<span class="check-mark"></span>
+<span class="option-text">I don't know enough about them</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="Nothing has stopped me, I've taken them">
+<span class="check-mark"></span>
+<span class="option-text">Nothing has stopped me, I've taken them</span>
+</label>
+<label class="option-label" onclick="toggleMulti(this)">
+<input type="checkbox" name="q4" value="Just haven't got around to it">
+<span class="check-mark"></span>
+<span class="option-text">Just haven't got around to it</span>
+</label>
+</div>
+<button class="btn btn-block q4-next" id="q4Next" onclick="advanceQ4()">Next</button>
+</div>
+
+<!-- FRAME 6: Q5 -->
+<div class="frame" id="frame-q5">
+<h2 class="q-title">If peptides were prescribed by an Australian doctor and compounded by an Australian pharmacy, would you consider using them?</h2>
+<div class="option-group" data-q="q5" data-type="single">
+<label class="option-label" onclick="selectSingle(this,'q5')">
+<input type="radio" name="q5" value="Definitely">
+<span class="radio-mark"></span>
+<span class="option-text">Definitely</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q5')">
+<input type="radio" name="q5" value="Probably">
+<span class="radio-mark"></span>
+<span class="option-text">Probably</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q5')">
+<input type="radio" name="q5" value="Maybe">
+<span class="radio-mark"></span>
+<span class="option-text">Maybe</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q5')">
+<input type="radio" name="q5" value="Probably Not">
+<span class="radio-mark"></span>
+<span class="option-text">Probably Not</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q5')">
+<input type="radio" name="q5" value="No">
+<span class="radio-mark"></span>
+<span class="option-text">No</span>
+</label>
+</div>
+</div>
+
+<!-- FRAME 7: Q6 -->
+<div class="frame" id="frame-q6">
+<h2 class="q-title">To feel like your best self, what monthly amount would you be comfortable spending on a doctor-led protocol?</h2>
+<div class="option-group" data-q="q6" data-type="single">
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="Under $300">
+<span class="radio-mark"></span>
+<span class="option-text">Under $300</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$300 to $399">
+<span class="radio-mark"></span>
+<span class="option-text">$300 to $399</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$400 to $499">
+<span class="radio-mark"></span>
+<span class="option-text">$400 to $499</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$500 to $599">
+<span class="radio-mark"></span>
+<span class="option-text">$500 to $599</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$600 to $699">
+<span class="radio-mark"></span>
+<span class="option-text">$600 to $699</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$700 to $799">
+<span class="radio-mark"></span>
+<span class="option-text">$700 to $799</span>
+</label>
+<label class="option-label" onclick="selectSingle(this,'q6')">
+<input type="radio" name="q6" value="$800+">
+<span class="radio-mark"></span>
+<span class="option-text">$800+</span>
+</label>
+</div>
+</div>
+
+<!-- FRAME 8: Q7 (chips) -->
+<div class="frame" id="frame-q7">
+<h2 class="q-title">Last bit. How old are you, and where do you go when you're off?</h2>
+<div class="chip-group-label">Age</div>
+<div class="chip-wrap" id="q7AgeChips">
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="Under 30"><span>Under 30</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="30 to 39"><span>30 to 39</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="40 to 49"><span>40 to 49</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="50 to 59"><span>50 to 59</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="60+"><span>60+</span></label>
+</div>
+<div class="chip-group-label" style="margin-top:2rem">Off swing</div>
+<div class="chip-wrap" id="q7OffChips">
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Perth"><span>Perth</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Regional WA"><span>Regional WA</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Queensland"><span>Queensland</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="New South Wales"><span>New South Wales</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="South Australia"><span>South Australia</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Northern Territory"><span>Northern Territory</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="I live locally, not fly in fly out"><span>I live locally, not fly in fly out</span></label>
+</div>
+<button class="btn btn-block" style="margin-top:2rem" id="q7Next" onclick="advanceQ7()" disabled>Next</button>
+</div>
+
+<!-- FRAME 9: Thank you -->
+<div class="frame" id="frame-thanks">
+<h1 style="margin-bottom:1.5rem;margin-top:2rem">Thanks. Your answers are in.</h1>
+<p>Nothing you answered is attached to your name. The study helps us build something that actually fits the people on these sites.</p>
+<button class="btn btn-block" style="margin-top:2rem" onclick="showOptional()">Continue</button>
+</div>
+
+<!-- FRAME 14: Optional questions -->
+<div class="frame" id="frame-optional">
+<!-- Optional 1: Source -->
+<div class="optional-section" id="optSection1">
+<p class="optional-title">Where did you see this.</p>
+<div class="option-group" data-q="source" data-type="single">
+<label class="option-label" onclick="selectOptional(this,'source')">
+<input type="radio" name="source" value="A screen at my camp">
+<span class="radio-mark"></span>
+<span class="option-text">A screen at my camp</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'source')">
+<input type="radio" name="source" value="A mate told me">
+<span class="radio-mark"></span>
+<span class="option-text">A mate told me</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'source')">
+<input type="radio" name="source" value="I searched for it">
+<span class="radio-mark"></span>
+<span class="option-text">I searched for it</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'source')">
+<input type="radio" name="source" value="Somewhere else">
+<span class="radio-mark"></span>
+<span class="option-text">Somewhere else</span>
+</label>
+</div>
+</div>
+
+<!-- Optional 2: Seen screens -->
+<div class="optional-section" id="optSection2" style="margin-top:2.5rem">
+<p class="optional-title">Seen any of these on the screens?</p>
+<div class="option-group" data-q="seen_screens" data-type="single">
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Have you heard of peptides?">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Have you heard of peptides?"</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Everyone has an opinion on peptides. Not many could explain one.">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Everyone has an opinion on peptides. Not many could explain one."</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Everything you know about this, you got from a bloke at the gym.">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Everything you know about this, you got from a bloke at the gym."</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Peptides. The thing nobody discusses at work.">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Peptides. The thing nobody discusses at work."</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Nobody has ever asked you. We are.">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Nobody has ever asked you. We are."</span>
+</label>
+<label class="option-label" onclick="selectOptional(this,'seen_screens')">
+<input type="radio" name="seen_screens" value="Peptides. Seven questions. Anonymous.">
+<span class="radio-mark"></span>
+<span class="option-text concept-option">"Peptides. Seven questions. Anonymous."</span>
+</label>
+</div>
+</div>
+
+<!-- Optional 3: Free text -->
+<div class="optional-section" id="optSection3" style="margin-top:2.5rem">
+<p class="optional-title">Anything you reckon we should know?</p>
+<div class="field">
+<textarea id="feedbackText" placeholder="Optional" rows="3"></textarea>
+</div>
+</div>
+
+<button class="btn btn-block" style="margin-top:1rem" onclick="submitOptionalAndContinue()">Continue</button>
+<button class="optional-skip" onclick="submitOptionalAndContinue()" style="display:block;margin-top:.5rem;text-align:center;width:100%">Skip these</button>
+</div>
+
+<!-- FRAME 10: Invitation -->
+<div class="frame" id="frame-invite">
+<p style="margin-top:2rem;margin-bottom:1.5rem">Fair enough to tell you what this is for.</p>
+<p>House of Longevity opens this year. Australian doctors, an Australian compounding pharmacy, and a blood test before anything is prescribed.</p>
+<p>The first 1,000 places are going to people who work on these sites, before anyone else is offered one. A founding rate held for your first 12 months. A conversation with an Australian doctor rather than a salesperson.</p>
+<p>First in, first served. No application, no assessment.</p>
+<div style="margin-top:2rem">
+<button class="btn btn-block" onclick="goToSignup()">Put my name down</button>
+<button class="btn btn-block btn-ghost" onclick="goToExit()">Not right now</button>
+</div>
+</div>
+
+<!-- FRAME 11: Name capture -->
+<div class="frame" id="frame-signup">
+<h2 style="margin-top:2rem;margin-bottom:1.75rem">Put my name down</h2>
+<form id="signupForm" onsubmit="return submitSignup(event)">
+<div class="field">
+<label for="fieldName">Name</label>
+<input type="text" id="fieldName" name="name" required autocomplete="name">
+</div>
+<div class="field">
+<label for="fieldEmail">Email</label>
+<input type="email" id="fieldEmail" name="email" required autocomplete="email">
+</div>
+<div class="field">
+<label for="fieldMobile">Mobile</label>
+<input type="tel" id="fieldMobile" name="mobile" autocomplete="tel">
+</div>
+<div class="field">
+<label for="fieldNextHome">When are you next home?</label>
+<input type="text" id="fieldNextHome" name="next_home" placeholder="e.g. mid September">
+</div>
+<button type="submit" class="btn btn-block" id="signupBtn">Put my name down</button>
+</form>
+</div>
+
+<!-- FRAME 12: Confirmation -->
+<div class="frame" id="frame-confirm">
+<h1 style="margin-top:2rem;margin-bottom:1.5rem">Your name is down.</h1>
+<p>You are one of the first 1,000 from the mining community. We open later this year and work through in the order names came in, so you will hear from us with a date, not a maybe.</p>
+<p>Nothing to pay and nothing to commit to until you have spoken to an Australian doctor.</p>
+</div>
+
+<!-- FRAME 13: Exit -->
+<div class="frame" id="frame-exit">
+<h1 style="margin-top:2rem">All good. Your answers still help.</h1>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">This study is for research. It is not medical advice.</footer>
+
+<!-- Tracking (invisible) -->
+<script>
+// GA4 — add the measurement ID when the property exists (e.g. 'G-XXXXXXXXXX').
+// Left unset, this block does nothing.
+var GA4_ID = 'G-XXXXXXXXXX';
+if (GA4_ID && GA4_ID.indexOf('G-') === 0) {
+  var gs = document.createElement('script');
+  gs.async = true;
+  gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  document.head.appendChild(gs);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', GA4_ID);
+}
+
+// UTM capture — reads utm_source/medium/campaign/content/term from the URL,
+// keeps them for the whole visit, and sends them with every submission so
+// each response can be attributed to the creative that drove it.
+var utm = {};
+try {
+  var utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var storedUtm = null;
+  try { storedUtm = sessionStorage.getItem('hol_utm'); } catch (e) {}
+  if (storedUtm) { try { utm = JSON.parse(storedUtm) || {}; } catch (e) { utm = {}; } }
+  var sp = new URLSearchParams(window.location.search);
+  utmFields.forEach(function (k) {
+    var v = sp.get(k);
+    if (v) { utm[k] = v; }
+  });
+  if (Object.keys(utm).length > 0) {
+    try { sessionStorage.setItem('hol_utm', JSON.stringify(utm)); } catch (e) {}
+  }
+} catch (e) {}
+</script>
+
+<script>
+const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwLNYVUz_EVg2t_fqwpkYEo7qvhEY85umPmKBlSem7GuEhKzLDNBH5WLY9CnPb8LKJL/exec';
+
+var answers = {};
+var optionalData = {};
+var currentFrame = 'entry';
+var q7ageVal = null;
+var q7offVal = null;
+
+function showFrame(id) {
+  var old = document.querySelector('.frame.visible');
+  if (old) {
+    old.classList.remove('visible');
+    setTimeout(function() {
+      old.classList.remove('active');
+      activateFrame(id);
+    }, 250);
+  } else {
+    var first = document.querySelector('.frame.active');
+    if (first) first.classList.remove('active');
+    activateFrame(id);
+  }
+}
+
+function activateFrame(id) {
+  var el = document.getElementById('frame-' + id);
+  if (!el) return;
+  el.classList.add('active');
+  window.scrollTo(0, 0);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      el.classList.add('visible');
+    });
+  });
+  currentFrame = id;
+
+  // Show/hide progress bar
+  var qFrames = ['q1','q2','q3','q4','q5','q6','q7'];
+  var qIdx = qFrames.indexOf(id);
+  var pw = document.getElementById('progressWrap');
+  if (qIdx >= 0) {
+    pw.style.display = 'block';
+    var pct = ((qIdx + 1) / 7 * 100).toFixed(1);
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = (qIdx + 1) + ' of 7';
+  } else {
+    pw.style.display = 'none';
+  }
+}
+
+function startQuiz() {
+  showFrame('q1');
+}
+
+function selectSingle(label, qKey) {
+  var group = label.parentElement;
+  var labels = group.querySelectorAll('.option-label');
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove('selected');
+  }
+  label.classList.add('selected');
+  var input = label.querySelector('input');
+  input.checked = true;
+  answers[qKey] = input.value;
+
+  // Auto-advance after short delay
+  setTimeout(function() {
+    advanceSingle(qKey);
+  }, 300);
+}
+
+function advanceSingle(qKey) {
+  var flow = {q1:'q2', q2:'q3', q3:'q4', q5:'q6', q6:'q7'};
+  if (flow[qKey]) {
+    showFrame(flow[qKey]);
+  }
+}
+
+function toggleMulti(label) {
+  label.classList.toggle('selected');
+  var input = label.querySelector('input');
+  input.checked = label.classList.contains('selected');
+}
+
+function advanceQ4() {
+  var checked = document.querySelectorAll('#frame-q4 input[name="q4"]:checked');
+  var vals = [];
+  for (var i = 0; i < checked.length; i++) {
+    vals.push(checked[i].value);
+  }
+  answers.q4 = vals;
+  showFrame('q5');
+}
+
+function selectChip(chip, groupName) {
+  var parent = chip.parentElement;
+  var chips = parent.querySelectorAll('.chip');
+  for (var i = 0; i < chips.length; i++) {
+    chips[i].classList.remove('selected');
+  }
+  chip.classList.add('selected');
+  chip.querySelector('input').checked = true;
+
+  if (groupName === 'q7age') {
+    q7ageVal = chip.querySelector('input').value;
+  } else if (groupName === 'q7off') {
+    q7offVal = chip.querySelector('input').value;
+  }
+
+  // Enable next if both selected
+  if (q7ageVal && q7offVal) {
+    document.getElementById('q7Next').disabled = false;
+  }
+}
+
+function advanceQ7() {
+  if (!q7ageVal || !q7offVal) return;
+  answers.q7_age = q7ageVal;
+  answers.q7_offsw = q7offVal;
+
+  // Submit quiz answers (fire and forget)
+  submitData({
+    q1: answers.q1 || null,
+    q2: answers.q2 || null,
+    q3: answers.q3 || null,
+    q4: answers.q4 || [],
+    q5: answers.q5 || null,
+    q6: answers.q6 || null,
+    q7_age: answers.q7_age || null,
+    q7_offsw: answers.q7_offsw || null,
+    type: 'quiz'
+  });
+
+  showFrame('thanks');
+}
+
+function showOptional() {
+  showFrame('optional');
+}
+
+function selectOptional(label, qKey) {
+  var group = label.parentElement;
+  var labels = group.querySelectorAll('.option-label');
+  for (var i = 0; i < labels.length; i++) {
+    labels[i].classList.remove('selected');
+  }
+  label.classList.add('selected');
+  label.querySelector('input').checked = true;
+  optionalData[qKey] = label.querySelector('input').value;
+}
+
+function submitOptionalAndContinue() {
+  var fb = document.getElementById('feedbackText').value.trim();
+  if (fb) optionalData.feedback = fb;
+
+  // Submit optional data if anything was answered
+  if (Object.keys(optionalData).length > 0) {
+    submitData({
+      source: optionalData.source || null,
+      seen_screens: optionalData.seen_screens || null,
+      feedback: optionalData.feedback || null,
+      type: 'optional'
+    });
+  }
+
+  showFrame('invite');
+}
+
+function goToSignup() {
+  showFrame('signup');
+}
+
+function goToExit() {
+  // Record that they did not sign up
+  submitData({
+    signed_up: 'No',
+    type: 'signup_decision'
+  });
+  showFrame('exit');
+}
+
+function submitSignup(e) {
+  e.preventDefault();
+  var name = document.getElementById('fieldName').value.trim();
+  var email = document.getElementById('fieldEmail').value.trim();
+  var mobile = document.getElementById('fieldMobile').value.trim();
+  var nextHome = document.getElementById('fieldNextHome').value.trim();
+
+  if (!name || !email) return false;
+
+  document.getElementById('signupBtn').disabled = true;
+  document.getElementById('signupBtn').textContent = 'Sending...';
+
+  submitData({
+    signed_up: 'Yes',
+    name: name,
+    email: email,
+    mobile: mobile || null,
+    next_home: nextHome || null,
+    type: 'signup'
+  });
+
+  setTimeout(function() {
+    showFrame('confirm');
+  }, 400);
+
+  return false;
+}
+
+function submitData(payload) {
+  for (var k in utm) { if (Object.prototype.hasOwnProperty.call(utm, k)) { payload[k] = utm[k]; } }
+  if (!SUBMIT_URL || SUBMIT_URL === 'PLACEHOLDER_URL') {
+    if (typeof console !== 'undefined') {
+      console.log('[Site Study] Would submit:', JSON.stringify(payload));
+    }
+    return;
+  }
+  try {
+    // Use fetch with no-cors to handle Apps Script redirect
+    if (typeof fetch !== 'undefined') {
+      fetch(SUBMIT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+        redirect: 'follow'
+      }).catch(function() {});
+    } else {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', SUBMIT_URL, true);
+      xhr.setRequestHeader('Content-Type', 'text/plain');
+      xhr.send(JSON.stringify(payload));
+    }
+  } catch(e) {
+    // Fire and forget
+  }
+}
+
+// Initialise: show entry frame
+(function() {
+  var entry = document.getElementById('frame-entry');
+  entry.classList.add('active');
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      entry.classList.add('visible');
+    });
+  });
+})();
+</script>
+</body>
+</html>
