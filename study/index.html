@@ -124,6 +124,7 @@ font-family:var(--sans);
 }
 /* Question styles */
 .q-title{margin-bottom:1.75rem;margin-top:3.5rem}
+.multi-hint{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:-1.25rem 0 1.5rem;font-variant:small-caps}
 .option-group{display:flex;flex-direction:column;gap:.625rem}
 .option-label{
 display:flex;align-items:flex-start;gap:.75rem;
@@ -308,17 +309,17 @@ font-size:.875rem;
 <h2 class="q-title">Have you heard of peptides?</h2>
 <div class="option-group" data-q="q1" data-type="single">
 <label class="option-label" onclick="selectSingle(this,'q1')">
-<input type="radio" name="q1" value="Yes, I know them well">
+<input type="radio" disabled name="q1" value="Yes, I know them well">
 <span class="radio-mark"></span>
 <span class="option-text">Yes, I know them well</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q1')">
-<input type="radio" name="q1" value="I've heard of them but don't know much">
+<input type="radio" disabled name="q1" value="I've heard of them but don't know much">
 <span class="radio-mark"></span>
 <span class="option-text">I've heard of them but don't know much</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q1')">
-<input type="radio" name="q1" value="No, never heard of them">
+<input type="radio" disabled name="q1" value="No, never heard of them">
 <span class="radio-mark"></span>
 <span class="option-text">No, never heard of them</span>
 </label>
@@ -330,22 +331,22 @@ font-size:.875rem;
 <h2 class="q-title">Do you know what peptides actually do?</h2>
 <div class="option-group" data-q="q2" data-type="single">
 <label class="option-label" onclick="selectSingle(this,'q2')">
-<input type="radio" name="q2" value="Yes, I could explain how they work">
+<input type="radio" disabled name="q2" value="Yes, I could explain how they work">
 <span class="radio-mark"></span>
 <span class="option-text">Yes, I could explain how they work</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q2')">
-<input type="radio" name="q2" value="I have a rough idea">
+<input type="radio" disabled name="q2" value="I have a rough idea">
 <span class="radio-mark"></span>
 <span class="option-text">I have a rough idea</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q2')">
-<input type="radio" name="q2" value="I've heard of them but couldn't tell you what they do">
+<input type="radio" disabled name="q2" value="I've heard of them but couldn't tell you what they do">
 <span class="radio-mark"></span>
 <span class="option-text">I've heard of them but couldn't tell you what they do</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q2')">
-<input type="radio" name="q2" value="No, no idea">
+<input type="radio" disabled name="q2" value="No, no idea">
 <span class="radio-mark"></span>
 <span class="option-text">No, no idea</span>
 </label>
@@ -357,17 +358,17 @@ font-size:.875rem;
 <h2 class="q-title">Do you know someone who has taken peptides?</h2>
 <div class="option-group" data-q="q3" data-type="single">
 <label class="option-label" onclick="selectSingle(this,'q3')">
-<input type="radio" name="q3" value="Yes">
+<input type="radio" disabled name="q3" value="Yes">
 <span class="radio-mark"></span>
 <span class="option-text">Yes</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q3')">
-<input type="radio" name="q3" value="No">
+<input type="radio" disabled name="q3" value="No">
 <span class="radio-mark"></span>
 <span class="option-text">No</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q3')">
-<input type="radio" name="q3" value="Not sure">
+<input type="radio" disabled name="q3" value="Not sure">
 <span class="radio-mark"></span>
 <span class="option-text">Not sure</span>
 </label>
@@ -377,49 +378,50 @@ font-size:.875rem;
 <!-- FRAME 5: Q4 (multi-select) -->
 <div class="frame" id="frame-q4">
 <h2 class="q-title">If you haven't taken them, what has stopped you?</h2>
+<p class="multi-hint">Pick all that apply</p>
 <div class="option-group" data-q="q4" data-type="multi">
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="I don't know who to get them from">
+<input type="checkbox" name="q4" disabled value="I don't know who to get them from">
 <span class="check-mark"></span>
 <span class="option-text">I don't know who to get them from</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="I don't trust the sources I've seen">
+<input type="checkbox" name="q4" disabled value="I don't trust the sources I've seen">
 <span class="check-mark"></span>
 <span class="option-text">I don't trust the sources I've seen</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="I wasn't sure they were legal">
+<input type="checkbox" name="q4" disabled value="I wasn't sure they were legal">
 <span class="check-mark"></span>
 <span class="option-text">I wasn't sure they were legal</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="Safety concerns">
+<input type="checkbox" name="q4" disabled value="Safety concerns">
 <span class="check-mark"></span>
 <span class="option-text">Safety concerns</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="Injecting and mixing it myself seems like a hassle">
+<input type="checkbox" name="q4" disabled value="Injecting and mixing it myself seems like a hassle">
 <span class="check-mark"></span>
 <span class="option-text">Injecting and mixing it myself seems like a hassle</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="Cost">
+<input type="checkbox" name="q4" disabled value="Cost">
 <span class="check-mark"></span>
 <span class="option-text">Cost</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="I don't know enough about them">
+<input type="checkbox" name="q4" disabled value="I don't know enough about them">
 <span class="check-mark"></span>
 <span class="option-text">I don't know enough about them</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="Nothing has stopped me, I've taken them">
+<input type="checkbox" name="q4" disabled value="Nothing has stopped me, I've taken them">
 <span class="check-mark"></span>
 <span class="option-text">Nothing has stopped me, I've taken them</span>
 </label>
 <label class="option-label" onclick="toggleMulti(this)">
-<input type="checkbox" name="q4" value="Just haven't got around to it">
+<input type="checkbox" name="q4" disabled value="Just haven't got around to it">
 <span class="check-mark"></span>
 <span class="option-text">Just haven't got around to it</span>
 </label>
@@ -432,27 +434,27 @@ font-size:.875rem;
 <h2 class="q-title">If peptides were prescribed by an Australian doctor and compounded by an Australian pharmacy, would you consider using them?</h2>
 <div class="option-group" data-q="q5" data-type="single">
 <label class="option-label" onclick="selectSingle(this,'q5')">
-<input type="radio" name="q5" value="Definitely">
+<input type="radio" disabled name="q5" value="Definitely">
 <span class="radio-mark"></span>
 <span class="option-text">Definitely</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q5')">
-<input type="radio" name="q5" value="Probably">
+<input type="radio" disabled name="q5" value="Probably">
 <span class="radio-mark"></span>
 <span class="option-text">Probably</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q5')">
-<input type="radio" name="q5" value="Maybe">
+<input type="radio" disabled name="q5" value="Maybe">
 <span class="radio-mark"></span>
 <span class="option-text">Maybe</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q5')">
-<input type="radio" name="q5" value="Probably Not">
+<input type="radio" disabled name="q5" value="Probably Not">
 <span class="radio-mark"></span>
 <span class="option-text">Probably Not</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q5')">
-<input type="radio" name="q5" value="No">
+<input type="radio" disabled name="q5" value="No">
 <span class="radio-mark"></span>
 <span class="option-text">No</span>
 </label>
@@ -464,37 +466,37 @@ font-size:.875rem;
 <h2 class="q-title">To feel like your best self, what monthly amount would you be comfortable spending on a doctor-led protocol?</h2>
 <div class="option-group" data-q="q6" data-type="single">
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="Under $300">
+<input type="radio" disabled name="q6" value="Under $300">
 <span class="radio-mark"></span>
 <span class="option-text">Under $300</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$300 to $399">
+<input type="radio" disabled name="q6" value="$300 to $399">
 <span class="radio-mark"></span>
 <span class="option-text">$300 to $399</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$400 to $499">
+<input type="radio" disabled name="q6" value="$400 to $499">
 <span class="radio-mark"></span>
 <span class="option-text">$400 to $499</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$500 to $599">
+<input type="radio" disabled name="q6" value="$500 to $599">
 <span class="radio-mark"></span>
 <span class="option-text">$500 to $599</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$600 to $699">
+<input type="radio" disabled name="q6" value="$600 to $699">
 <span class="radio-mark"></span>
 <span class="option-text">$600 to $699</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$700 to $799">
+<input type="radio" disabled name="q6" value="$700 to $799">
 <span class="radio-mark"></span>
 <span class="option-text">$700 to $799</span>
 </label>
 <label class="option-label" onclick="selectSingle(this,'q6')">
-<input type="radio" name="q6" value="$800+">
+<input type="radio" disabled name="q6" value="$800+">
 <span class="radio-mark"></span>
 <span class="option-text">$800+</span>
 </label>
@@ -506,21 +508,21 @@ font-size:.875rem;
 <h2 class="q-title">Last bit. How old are you, and where do you go when you're off?</h2>
 <div class="chip-group-label">Age</div>
 <div class="chip-wrap" id="q7AgeChips">
-<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="Under 30"><span>Under 30</span></label>
-<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="30 to 39"><span>30 to 39</span></label>
-<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="40 to 49"><span>40 to 49</span></label>
-<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="50 to 59"><span>50 to 59</span></label>
-<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" name="q7age" value="60+"><span>60+</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" disabled name="q7age" value="Under 30"><span>Under 30</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" disabled name="q7age" value="30 to 39"><span>30 to 39</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" disabled name="q7age" value="40 to 49"><span>40 to 49</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" disabled name="q7age" value="50 to 59"><span>50 to 59</span></label>
+<label class="chip" onclick="selectChip(this,'q7age')"><input type="radio" disabled name="q7age" value="60+"><span>60+</span></label>
 </div>
 <div class="chip-group-label" style="margin-top:2rem">Off swing</div>
 <div class="chip-wrap" id="q7OffChips">
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Perth"><span>Perth</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Regional WA"><span>Regional WA</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Queensland"><span>Queensland</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="New South Wales"><span>New South Wales</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="South Australia"><span>South Australia</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="Northern Territory"><span>Northern Territory</span></label>
-<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" name="q7off" value="I live locally, not fly in fly out"><span>I live locally, not fly in fly out</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="Perth"><span>Perth</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="Regional WA"><span>Regional WA</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="Queensland"><span>Queensland</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="New South Wales"><span>New South Wales</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="South Australia"><span>South Australia</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="Northern Territory"><span>Northern Territory</span></label>
+<label class="chip" onclick="selectChip(this,'q7off')"><input type="radio" disabled name="q7off" value="I live locally, not fly in fly out"><span>I live locally, not fly in fly out</span></label>
 </div>
 <button class="btn btn-block" style="margin-top:2rem" id="q7Next" onclick="advanceQ7()" disabled>Next</button>
 </div>
@@ -539,22 +541,22 @@ font-size:.875rem;
 <p class="optional-title">Where did you see this.</p>
 <div class="option-group" data-q="source" data-type="single">
 <label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" name="source" value="A screen at my camp">
+<input type="radio" disabled name="source" value="A screen at my camp">
 <span class="radio-mark"></span>
 <span class="option-text">A screen at my camp</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" name="source" value="A mate told me">
+<input type="radio" disabled name="source" value="A mate told me">
 <span class="radio-mark"></span>
 <span class="option-text">A mate told me</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" name="source" value="I searched for it">
+<input type="radio" disabled name="source" value="I searched for it">
 <span class="radio-mark"></span>
 <span class="option-text">I searched for it</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'source')">
-<input type="radio" name="source" value="Somewhere else">
+<input type="radio" disabled name="source" value="Somewhere else">
 <span class="radio-mark"></span>
 <span class="option-text">Somewhere else</span>
 </label>
@@ -566,32 +568,32 @@ font-size:.875rem;
 <p class="optional-title">Seen any of these on the screens?</p>
 <div class="option-group" data-q="seen_screens" data-type="single">
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Have you heard of peptides?">
+<input type="radio" disabled name="seen_screens" value="Have you heard of peptides?">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Have you heard of peptides?"</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Everyone has an opinion on peptides. Not many could explain one.">
+<input type="radio" disabled name="seen_screens" value="Everyone has an opinion on peptides. Not many could explain one.">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Everyone has an opinion on peptides. Not many could explain one."</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Everything you know about this, you got from a bloke at the gym.">
+<input type="radio" disabled name="seen_screens" value="Everything you know about this, you got from a bloke at the gym.">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Everything you know about this, you got from a bloke at the gym."</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Peptides. The thing nobody discusses at work.">
+<input type="radio" disabled name="seen_screens" value="Peptides. The thing nobody discusses at work.">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Peptides. The thing nobody discusses at work."</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Nobody has ever asked you. We are.">
+<input type="radio" disabled name="seen_screens" value="Nobody has ever asked you. We are.">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Nobody has ever asked you. We are."</span>
 </label>
 <label class="option-label" onclick="selectOptional(this,'seen_screens')">
-<input type="radio" name="seen_screens" value="Peptides. Seven questions. Anonymous.">
+<input type="radio" disabled name="seen_screens" value="Peptides. Seven questions. Anonymous.">
 <span class="radio-mark"></span>
 <span class="option-text concept-option">"Peptides. Seven questions. Anonymous."</span>
 </label>
@@ -665,7 +667,7 @@ font-size:.875rem;
 <script>
 // GA4 — add the measurement ID when the property exists (e.g. 'G-XXXXXXXXXX').
 // Left unset, this block does nothing.
-var GA4_ID = 'G-XXXXXXXXXX';
+var GA4_ID = ''; // Paste the measurement ID here, e.g. 'G-ABC123XYZ'
 if (GA4_ID && GA4_ID.indexOf('G-') === 0) {
   var gs = document.createElement('script');
   gs.async = true;
@@ -776,9 +778,10 @@ function advanceSingle(qKey) {
 }
 
 function toggleMulti(label) {
-  label.classList.toggle('selected');
+  var next = !label.classList.contains('selected');
+  label.classList.toggle('selected', next);
   var input = label.querySelector('input');
-  input.checked = label.classList.contains('selected');
+  input.checked = next;
 }
 
 function advanceQ4() {
