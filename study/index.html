@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Site Study | House of Longevity</title>
-<meta name="description" content="Seven questions. Anonymous. About a minute. A study for people who work on mine sites.">
+<meta name="description" content="Eight questions. Anonymous. About a minute. A study for people who work on mine sites.">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -268,7 +268,7 @@ letter-spacing:.02em;
 <div class="lockup">THE SITE STUDY &middot; Mining and peptides</div>
 <div class="gold-thread"></div>
 <h1 class="headline">Nobody has ever asked you. We are.</h1>
-<p class="subline">Seven questions. Anonymous. About a minute.</p>
+<p class="subline">Eight questions. Anonymous. About a minute.</p>
 <button class="btn btn-block" onclick="startQuiz()">Start the study</button>
 <p class="framing">We are building something for people on these sites and we would rather ask than guess. House of Longevity is an Australian clinic. Nothing you answer is attached to your name.</p>
 </div>
@@ -472,6 +472,79 @@ letter-spacing:.02em;
 </div>
 </div>
 
+<!-- FRAME 7b: Q-Health (multi-select) -->
+<div class="frame" id="frame-qhealth">
+<h2 class="q-title">Mining can place significant demands on sleep, recovery, energy, body composition and overall health. If you could speak with a doctor about a personalised program to optimise your health and performance, what would you most want help with?</h2>
+<p class="multi-hint">Multiple choice &middot; pick all that apply</p>
+<div class="option-group" data-q="qhealth" data-type="multi">
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve sleep quality and recovery">
+<span class="check-mark"></span>
+<span class="option-text">Improve sleep quality and recovery</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Lose body fat / manage weight">
+<span class="check-mark"></span>
+<span class="option-text">Lose body fat / manage weight</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Build or maintain muscle">
+<span class="check-mark"></span>
+<span class="option-text">Build or maintain muscle</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve energy and reduce fatigue">
+<span class="check-mark"></span>
+<span class="option-text">Improve energy and reduce fatigue</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve physical recovery / reduce soreness">
+<span class="check-mark"></span>
+<span class="option-text">Improve physical recovery / reduce soreness</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve strength and physical performance">
+<span class="check-mark"></span>
+<span class="option-text">Improve strength and physical performance</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve focus, concentration and mental performance">
+<span class="check-mark"></span>
+<span class="option-text">Improve focus, concentration and mental performance</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Support healthy ageing / longevity">
+<span class="check-mark"></span>
+<span class="option-text">Support healthy ageing / longevity</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve overall health and wellbeing">
+<span class="check-mark"></span>
+<span class="option-text">Improve overall health and wellbeing</span>
+</label>
+<label class="option-label" onclick="toggleHealthOption(this,false,false)">
+<input type="checkbox" name="qhealth" disabled value="Improve sexual health / libido">
+<span class="check-mark"></span>
+<span class="option-text">Improve sexual health / libido</span>
+</label>
+<label class="option-label" data-other="true" onclick="toggleHealthOption(this,false,true)">
+<input type="checkbox" name="qhealth" disabled value="Other">
+<span class="check-mark"></span>
+<span class="option-text">Other</span>
+</label>
+<label class="option-label" data-exclusive="true" onclick="toggleHealthOption(this,true,false)">
+<input type="checkbox" name="qhealth" disabled value="I wouldn't be interested in a doctor-guided program">
+<span class="check-mark"></span>
+<span class="option-text">I wouldn't be interested in a doctor-guided program</span>
+</label>
+</div>
+<div class="field" id="qHealthOtherField" style="display:none;margin-top:.75rem">
+<label for="fieldHealthOther">Tell us more</label>
+<input type="text" id="fieldHealthOther" name="health_other" placeholder="Other">
+</div>
+<button class="btn btn-block q4-next" id="qHealthNext" onclick="advanceQHealth()">Next</button>
+</div>
+
 <!-- FRAME 8: Q7 (chips) -->
 <div class="frame" id="frame-q7">
 <h2 class="q-title">Last bit. How old are you, and where do you go when you're off?</h2>
@@ -629,14 +702,14 @@ function activateFrame(id) {
   currentFrame = id;
 
   // Show/hide progress bar
-  var qFrames = ['q1','q2','q3','q4','q5','q6','q7'];
+  var qFrames = ['q1','q2','q3','q4','q5','q6','qhealth','q7'];
   var qIdx = qFrames.indexOf(id);
   var pw = document.getElementById('progressWrap');
   if (qIdx >= 0) {
     pw.style.display = 'block';
-    var pct = ((qIdx + 1) / 7 * 100).toFixed(1);
+    var pct = ((qIdx + 1) / 8 * 100).toFixed(1);
     document.getElementById('progressBar').style.width = pct + '%';
-    document.getElementById('progressLabel').textContent = (qIdx + 1) + ' of 7';
+    document.getElementById('progressLabel').textContent = (qIdx + 1) + ' of 8';
   } else {
     pw.style.display = 'none';
   }
@@ -664,7 +737,7 @@ function selectSingle(label, qKey) {
 }
 
 function advanceSingle(qKey) {
-  var flow = {q1:'q2', q2:'q3', q3:'q4', q5:'q6', q6:'q7'};
+  var flow = {q1:'q2', q2:'q3', q3:'q4', q5:'q6', q6:'qhealth'};
   if (flow[qKey]) {
     showFrame(flow[qKey]);
   }
@@ -685,6 +758,50 @@ function advanceQ4() {
   }
   answers.q4 = vals;
   showFrame('q5');
+}
+
+function toggleHealthOption(label, isExclusive, isOther) {
+  var group = label.parentElement;
+  var input = label.querySelector('input');
+  var next = !label.classList.contains('selected');
+
+  if (next && isExclusive) {
+    var all = group.querySelectorAll('.option-label');
+    for (var i = 0; i < all.length; i++) {
+      all[i].classList.remove('selected');
+      all[i].querySelector('input').checked = false;
+    }
+  } else if (next) {
+    var excl = group.querySelector('.option-label.selected[data-exclusive="true"]');
+    if (excl) {
+      excl.classList.remove('selected');
+      excl.querySelector('input').checked = false;
+    }
+  }
+
+  label.classList.toggle('selected', next);
+  input.checked = next;
+
+  var otherField = document.getElementById('qHealthOtherField');
+  var otherLabel = group.querySelector('[data-other="true"]');
+  if (otherField && otherLabel) {
+    var otherOn = otherLabel.classList.contains('selected');
+    otherField.style.display = otherOn ? 'block' : 'none';
+    if (!otherOn) {
+      document.getElementById('fieldHealthOther').value = '';
+    }
+  }
+}
+
+function advanceQHealth() {
+  var checked = document.querySelectorAll('#frame-qhealth input[name="qhealth"]:checked');
+  var vals = [];
+  for (var i = 0; i < checked.length; i++) {
+    vals.push(checked[i].value);
+  }
+  answers.qhealth = vals;
+  answers.qhealth_other = document.getElementById('fieldHealthOther').value.trim();
+  showFrame('q7');
 }
 
 function selectChip(chip, groupName) {
@@ -721,6 +838,8 @@ function advanceQ7() {
     q4: answers.q4 || [],
     q5: answers.q5 || null,
     q6: answers.q6 || null,
+    qhealth: answers.qhealth || [],
+    qhealth_other: answers.qhealth_other || null,
     q7_age: answers.q7_age || null,
     q7_offsw: answers.q7_offsw || null,
     type: 'quiz'
