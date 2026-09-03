@@ -702,7 +702,7 @@ function activateFrame(id) {
   currentFrame = id;
 
   // Show/hide progress bar
-  var qFrames = ['q1','q2','q3','q4','q5','q6','qhealth','q7'];
+  var qFrames = ['qhealth','q1','q2','q3','q4','q5','q6','q7'];
   var qIdx = qFrames.indexOf(id);
   var pw = document.getElementById('progressWrap');
   if (qIdx >= 0) {
@@ -716,7 +716,7 @@ function activateFrame(id) {
 }
 
 function startQuiz() {
-  showFrame('q1');
+  showFrame('qhealth');
 }
 
 function selectSingle(label, qKey) {
@@ -737,7 +737,7 @@ function selectSingle(label, qKey) {
 }
 
 function advanceSingle(qKey) {
-  var flow = {q1:'q2', q2:'q3', q3:'q4', q5:'q6', q6:'qhealth'};
+  var flow = {q1:'q2', q2:'q3', q3:'q4', q5:'q6', q6:'q7'};
   if (flow[qKey]) {
     showFrame(flow[qKey]);
   }
@@ -801,7 +801,7 @@ function advanceQHealth() {
   }
   answers.qhealth = vals;
   answers.qhealth_other = document.getElementById('fieldHealthOther').value.trim();
-  showFrame('q7');
+  showFrame('q1');
 }
 
 function selectChip(chip, groupName) {
